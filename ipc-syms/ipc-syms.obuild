@@ -1,0 +1,15 @@
+name: ipc-syms
+version: 0.0.1
+description: Tools for collecting IPC function arguments
+licence: BSD3
+license-file: LICENSE
+author: Jyun-Yan You <jyyou.tw@gmail.com>
+obuild-ver: 1
+
+executable ipc-syms
+  src-dir: src
+  main-is: main.ml
+  build-deps: batteries,
+              bitstring, bitstring.syntax,
+              elf, mips32dis
+  pp: camlp4o
