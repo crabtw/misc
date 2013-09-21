@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# /etc/rc.local: Local multi-user start-up script.
+#
+
+mk_tap() {
+    local nic=$(tunctl -b -u crab)
+    ifconfig $nic up
+    brctl addif br0 $nic
+}
+
+# vm nic
+mk_tap
+mk_tap

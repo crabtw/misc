@@ -1,0 +1,25 @@
+#!/usr/bin/ruby
+
+CONFIG = {
+  :freebsd => {
+    :img => '/home/crab/vms/freebsd.qcow2',
+    :nic => '52:54:00:12:34:57',
+    :ifname => 'tap1',
+    :vnc => 'localhost:3'
+  }
+}
+
+config = CONFIG[ARGV.first.to_sym]
+
+params = %W[
+  -enable-kvm
+  -localtime
+  -m 1024
+  -daemonize
+  -vnc #{config[:vnc]}
+  -net nic,vlan=0,macaddr=#{config[:nic]}
+  -net tap,vlan=0,ifname=#{config[:ifname]},script=no,downscript=no
+  #{config[:img]}
+]
+
+exec "qemu-kvm", *params

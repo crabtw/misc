@@ -1,0 +1,8 @@
+#!/bin/sh
+
+LOCAL="10.1.1.1/30"
+REMOTE="10.1.1.2"
+TUN="tun0"
+
+ip link set tun0 up
+ip addr add $LOCAL brd + peer $REMOTE dev $TUN

@@ -1,0 +1,6 @@
+Description='VM Bridge'
+Interface=br0
+Connection=bridge
+BindsToInterfaces=()
+IP=static
+Address=('10.0.0.254/24')

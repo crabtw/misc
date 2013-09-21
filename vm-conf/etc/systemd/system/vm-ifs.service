@@ -1,0 +1,11 @@
+[Unit]
+Description=VM interfaces setting
+After=netctl@bridge.vm.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/vm-ifs
+
+[Install]
+WantedBy=multi-user.target
