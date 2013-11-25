@@ -34,7 +34,7 @@ if __FILE__ == $0
   file = File.basename ARGV.first
 
   Dir.chdir dir
-  all = Dir.entries(dir).select do |f|
+  all = Dir.entries('.').select do |f|
     f =~ /\.(jpe?g|png|bmp|gif)$/i
   end.sort_by {|f| nat_ord f}
 

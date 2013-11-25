@@ -30,15 +30,15 @@ class String
 end
 
 if __FILE__ == $0
-  i = 1
-  len = Math.log10(ARGV.size) + 1
-  dryrun = false
-
+  options = {}
   OptionParser.new do |opts|
-    opts.on('-s', '--start N', Integer, 'Start number (default 1)') {|v| i = v}
-    opts.on('-l', '--len N', Integer, 'Minimal length (default log10(number of file))') {|v| len = v}
-    opts.on('-d', '--dryrun', 'Don\'t rename files') {dryrun = true}
+    opts.on('-s', '--start N', Integer, 'Start number (default 1)') {|v| options[:start] = v}
+    opts.on('-l', '--len N', Integer, 'Minimal length (default log10(number of files) + 1)') {|v| options[:len] = v}
+    opts.on('-d', '--dryrun', 'Don\'t rename files') {options[:dryrun] = true}
   end.parse!
+
+  i = options[:start] || 1
+  len = options[:len] || Math.log10(ARGV.size).floor + 1
 
   ARGV.sort_by {|f| nat_ord f}.each do |old|
     ext = File.extname old
@@ -48,7 +48,7 @@ if __FILE__ == $0
     new += ext
 
     puts "#{old} => #{new}"
-    File.rename(old, new) unless dryrun
+    File.rename(old, new) unless options[:dryrun]
 
     i += 1
   end
