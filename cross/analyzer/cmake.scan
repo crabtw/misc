@@ -1,10 +1,10 @@
 #!/bin/sh
 
-TARGET="mips-unknown-linux-uclibc"
+TARGET="mips-linux-gnu"
 TOOLCHAIN_PATH="$HOME/x-tools/$TARGET"
 SYSROOT="$HOME/sysroot/$TARGET"
 
-SCAN_BUILD_DIR="$HOME/src/llvm-svn/tools/clang/tools/scan-build"
+SCAN_BUILD_DIR="$HOME/src/llvm-git/tools/clang/tools/scan-build"
 SCAN_BUILD_CC="$HOME/bin/$TARGET-clang"
 SCAN_BUILD_CXX="$HOME/bin/$TARGET-clang++"
 SCAN_BUILD_OUT="analysis"
@@ -19,12 +19,10 @@ export AR="$TARGET-ar"
 export AS="$TARGET-as"
 export STRIP="$TARGET-strip"
 
-export CFLAGS="--sysroot=$SYSROOT $CFLAGS"
-export CXXFLAGS="--sysroot=$SYSROOT $CXXFLAGS"
-export LDFLAGS="--sysroot=$SYSROOT $LDFLAGS"
-export CPPFLAGS="--sysroot=$SYSROOT $CPPFLAGS"
-
-export PKG_CONFIG_SYSROOT_DIR="$SYSROOT"
+export CFLAGS="--sysroot $SYSROOT $CFLAGS"
+export CXXFLAGS="--sysroot $SYSROOT $CXXFLAGS"
+export LDFLAGS="--sysroot $SYSROOT $LDFLAGS"
+export CPPFLAGS="--sysroot $SYSROOT $CPPFLAGS"
 
 scan-build \
     --use-analyzer="$SCAN_BUILD_CC" \
@@ -32,4 +30,4 @@ scan-build \
     --use-c++="$SCAN_BUILD_CXX" \
     -o "$SCAN_BUILD_OUT" \
     \
-    $* --host="$TARGET"
+    cmake -DCMAKE_TOOLCHAIN_FILE="$HOME/cmake/cross.cmake" $*

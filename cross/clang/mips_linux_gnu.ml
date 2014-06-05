@@ -1,6 +1,6 @@
 let home = Sys.getenv "HOME"
-let llvm_path = home ^ "/src/llvm-svn/b/Release+Asserts/bin"
-let toolchain_dir = home ^ "/tmp/mips-2013.05"
+let llvm_path = home ^ "/src/llvm-git/b/Release+Asserts/bin"
+let toolchain_dir = home ^ "/toolchain/mips-linux-gnu"
 let toolchain_path = toolchain_dir ^ "/bin"
 
 let cc =
@@ -16,11 +16,7 @@ let settings = [|
   "-mips32r2";
   "-mabi=32";
   "-fPIC";
-  "--sysroot"; toolchain_dir ^ "/mips-linux-gnu/libc";
-  "-B" ^ toolchain_dir ^ "/lib/gcc/mips-linux-gnu/4.7.3";
-  "-L" ^ toolchain_dir ^ "/lib/gcc/mips-linux-gnu/4.7.3";
-  "-I" ^ toolchain_dir ^ "/mips-linux-gnu/include/c++/4.7.3";
-  "-I" ^ toolchain_dir ^ "/mips-linux-gnu/include/c++/4.7.3/mips-linux-gnu";
+  "-gcc-toolchain"; toolchain_dir;
   (*"-integrated-as";*)
   "-Qunused-arguments";
 |]

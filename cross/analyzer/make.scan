@@ -1,9 +1,9 @@
 #!/bin/sh
 
-TARGET="mips-unknown-linux-uclibc"
+TARGET="mips-linux-gnu"
 TOOLCHAIN_PATH="$HOME/x-tools/$TARGET"
 
-SCAN_BUILD_DIR="$HOME/src/llvm-svn/tools/clang/tools/scan-build"
+SCAN_BUILD_DIR="$HOME/src/llvm-git/tools/clang/tools/scan-build"
 SCAN_BUILD_CC="$HOME/bin/$TARGET-clang"
 SCAN_BUILD_CXX="$HOME/bin/$TARGET-clang++"
 SCAN_BUILD_OUT="analysis"
