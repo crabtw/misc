@@ -1,6 +1,6 @@
 let home = Sys.getenv "HOME"
-let llvm_path = home ^ "/src/llvm-svn/b/Release+Asserts/bin"
-let toolchain_dir = home ^ "/tmp/rpi-tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian"
+let llvm_path = home ^ "/src/llvm-git/b/Release+Asserts/bin"
+let toolchain_dir = home ^ "/toolchain/arm-linux-gnueabihf"
 let toolchain_path = toolchain_dir ^ "/bin"
 
 let cc =
@@ -14,11 +14,7 @@ let settings = [|
   "-target"; "arm-linux-gnueabihf";
   "-mcpu=arm1176jzf-s";
   "--sysroot"; toolchain_dir ^ "/arm-linux-gnueabihf/libc";
-  "-B" ^ toolchain_dir ^ "/lib/gcc/arm-linux-gnueabihf/4.7.2";
-  "-L" ^ toolchain_dir ^ "/lib/gcc/arm-linux-gnueabihf/4.7.2";
-  "-L" ^ toolchain_dir ^ "/arm-linux-gnueabihf/lib";
-  "-I" ^ toolchain_dir ^ "/arm-linux-gnueabihf/include/c++/4.7.2";
-  "-I" ^ toolchain_dir ^ "/arm-linux-gnueabihf/include/c++/4.7.2/arm-linux-gnueabihf";
+  "-gcc-toolchain"; toolchain_dir;
   (*"-integrated-as";*)
   "-Qunused-arguments";
 |]

@@ -1,4 +1,4 @@
-TARGETS = arm-linux-gnueabihf mips-linux-gnu mips-unknown-linux-uclibc
+TARGETS = arm-linux-gnueabihf mips-linux-gnu
 TARGET_CLANGS = $(addsuffix -clang,$(TARGETS))
 
 LIB = unix.cmxa
